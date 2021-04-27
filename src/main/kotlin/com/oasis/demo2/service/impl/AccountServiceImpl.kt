@@ -23,7 +23,7 @@ class AccountServiceImpl(
     IAccountService {
 
     override fun findById(accountId: Int): AccountEntity {
-        return accountMapper.selectById(accountId)
+        return accountMapper.selectById(accountId) ?: throw NoSuchElementException("没有id为: $accountId 的用户")
     }
 
     override fun getAccounts(): Collection<AccountEntity> = dataSource.retrieveAccounts()
