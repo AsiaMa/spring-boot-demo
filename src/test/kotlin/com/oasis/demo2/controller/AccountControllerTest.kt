@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
 
 @SpringBootTest
@@ -59,7 +60,7 @@ internal class AccountControllerTest @Autowired constructor(
         }
 
         @Test
-        fun `should return Not Fount if the account id does not exist`() {
+        fun `should return Not Found if the account id does not exist`() {
             // given
             val accountId = 1000
 
@@ -90,9 +91,15 @@ internal class AccountControllerTest @Autowired constructor(
                 .andDo { print() }
                 .andExpect {
                     status { isCreated() }
-                    content { contentType(MediaType.APPLICATION_JSON) }
+                    content {
+                        contentType(MediaType.APPLICATION_JSON)
+                        json(objectMapper.writeValueAsString(newAccount))
+                    }
                     jsonPath("$.accountName") { value("bootstrap") }
                 }
+
+            mockMvc.get("$baseUrl/${newAccount.accountId}")
+                .andExpect { content { json(objectMapper.writeValueAsString(newAccount)) } }
         }
 
         @Test
@@ -109,6 +116,55 @@ internal class AccountControllerTest @Autowired constructor(
             preformPost
                 .andDo { print() }
                 .andExpect { status { isBadRequest() } }
+        }
+    }
+
+    @Nested
+    @DisplayName("PATCH /api/accounts")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class PatchExistingAccount {
+
+        @Test
+        fun `should update an existing account`() {
+            // given
+            val updatedAccount = AccountEntity(11, "book", "abc123")
+
+            // when
+            val performPatchRequest = mockMvc.patch(baseUrl) {
+                contentType = MediaType.APPLICATION_JSON
+                content = objectMapper.writeValueAsString(updatedAccount)
+            }
+
+            // then
+            performPatchRequest
+                .andDo { print() }
+                .andExpect {
+                    status { isOk() }
+                    content {
+                        contentType(MediaType.APPLICATION_JSON)
+                        json(objectMapper.writeValueAsString(updatedAccount))
+                    }
+                }
+
+            mockMvc.get("$baseUrl/${updatedAccount.accountId}")
+                .andExpect { content { json(objectMapper.writeValueAsString(updatedAccount)) } }
+        }
+
+        @Test
+        fun `should return Not Found if not account with given account id exists`() {
+            // given
+            val invalidAccount = AccountEntity(100, "近段时间", "qwe123")
+            // when
+            val performPatchRequest = mockMvc.patch(baseUrl) {
+                contentType = MediaType.APPLICATION_JSON
+                content = objectMapper.writeValueAsString(invalidAccount)
+            }
+            // then
+            performPatchRequest
+                .andDo { print() }
+                .andExpect {
+                    status { isNotFound() }
+                }
         }
     }
 }

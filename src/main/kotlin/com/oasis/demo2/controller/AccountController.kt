@@ -36,4 +36,7 @@ class AccountController(private val accountService: IAccountService) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun addAccount(@RequestBody account: AccountEntity): AccountEntity = accountService.addAccount(account)
+
+    @PatchMapping
+    fun updateAccount(@RequestBody account: AccountEntity): AccountEntity = accountService.updateAccount(account)
 }

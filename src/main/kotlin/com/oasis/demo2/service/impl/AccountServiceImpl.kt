@@ -36,4 +36,14 @@ class AccountServiceImpl(
         accountMapper.insert(account)
         return account
     }
+
+    override fun updateAccount(account: AccountEntity): AccountEntity {
+        val recordCount = accountMapper.updateById(account)
+
+        if (recordCount > 0) {
+            return account
+        } else {
+            throw NoSuchElementException("没有id为: ${account.accountId} 的用户")
+        }
+    }
 }

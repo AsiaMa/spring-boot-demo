@@ -26,4 +26,9 @@ interface IAccountService : IService<AccountEntity> {
      * 添加新用户
      */
     fun addAccount(account: AccountEntity): AccountEntity
+
+    /**
+     * 更新用户
+     */
+    fun updateAccount(account: AccountEntity): AccountEntity
 }
