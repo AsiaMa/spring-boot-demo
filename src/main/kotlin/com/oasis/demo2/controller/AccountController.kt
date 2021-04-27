@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController
  * @since 2021-04-27
  */
 @RestController
-@RequestMapping("/account")
+@RequestMapping("api/account")
 class AccountController {
     @Autowired
     lateinit var accountService: IAccountService
