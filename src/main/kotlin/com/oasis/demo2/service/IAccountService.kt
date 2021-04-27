@@ -16,4 +16,9 @@ interface IAccountService : IService<AccountEntity> {
      * 根据用户id查询
      */
     fun findById(accountId: Int): AccountEntity
+
+    /**
+     * 查询所有用户
+     */
+    fun getAccounts(): Collection<AccountEntity>
 }
