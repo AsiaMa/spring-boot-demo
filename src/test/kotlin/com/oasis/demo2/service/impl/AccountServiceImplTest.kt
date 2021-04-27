@@ -7,16 +7,16 @@ import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
 internal class AccountServiceImplTest {
 
-    @MockBean
-    lateinit var accountMapper: AccountMapper
     private val dataSource: AccountDataSource = mockk(relaxed = true)
+
+    private val accountMapper: AccountMapper = mockk(relaxed = true)
+
     private val accountService = AccountServiceImpl(accountMapper, dataSource)
 
     @Test

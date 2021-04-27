@@ -2,7 +2,7 @@ package com.oasis.demo2.dao
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
 import com.oasis.demo2.domain.entity.AccountEntity
-import org.springframework.stereotype.Repository
+import org.apache.ibatis.annotations.Mapper
 
 /**
  * <p>
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository
  * @author AsiaMa
  * @since 2021-04-27
  */
-@Repository
+@Mapper
 interface AccountMapper : BaseMapper<AccountEntity>
