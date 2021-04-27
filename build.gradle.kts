@@ -20,6 +20,10 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    // junit
+    testImplementation("junit:junit:4.13.1")
+    // assertj-core
+    testImplementation("org.assertj:assertj-core:3.19.0")
     // mybatis-plus
     implementation("com.baomidou:mybatis-plus-boot-starter:3.4.2")
     runtimeOnly("mysql:mysql-connector-java")
