@@ -3,7 +3,6 @@ package com.oasis.demo2.domain.entity
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
-import java.io.Serializable
 
 /**
  * <p>
@@ -19,7 +18,7 @@ data class AccountEntity(
      * 主键id
      */
     @TableId(value = "account_id", type = IdType.AUTO)
-    val accountId: Int,
+    val accountId: Int?,
     /**
      * 用户名
      */

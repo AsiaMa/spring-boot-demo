@@ -21,4 +21,9 @@ interface IAccountService : IService<AccountEntity> {
      * 查询所有用户
      */
     fun getAccounts(): Collection<AccountEntity>
+
+    /**
+     * 添加新用户
+     */
+    fun addAccount(account: AccountEntity): AccountEntity
 }

@@ -23,9 +23,17 @@ class AccountController(private val accountService: IAccountService) {
     fun handleNotFound(e: NoSuchElementException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleBadRequest(e: IllegalArgumentException): ResponseEntity<String> =
+        ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
+
     @GetMapping
     fun getAccount(): Collection<AccountEntity> = accountService.getAccounts()
 
     @GetMapping("/{id}")
     fun findById(@PathVariable("id") accountId: Int) = accountService.findById(accountId)
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addAccount(@RequestBody account: AccountEntity): AccountEntity = accountService.addAccount(account)
 }

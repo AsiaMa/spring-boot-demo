@@ -27,4 +27,13 @@ class AccountServiceImpl(
     }
 
     override fun getAccounts(): Collection<AccountEntity> = dataSource.retrieveAccounts()
+
+    override fun addAccount(account: AccountEntity): AccountEntity {
+        val existsAccount = accountMapper.selectById(account.accountId)
+        if (existsAccount != null) {
+            throw IllegalArgumentException("用户id为 ${existsAccount.accountId} 已存在")
+        }
+        accountMapper.insert(account)
+        return account
+    }
 }
