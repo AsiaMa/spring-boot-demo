@@ -31,4 +31,9 @@ interface IAccountService : IService<AccountEntity> {
      * 更新用户
      */
     fun updateAccount(account: AccountEntity): AccountEntity
+
+    /**
+     * 删除用户
+     */
+    fun deleteAccount(accountId: Int)
 }

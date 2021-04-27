@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.patch
-import org.springframework.test.web.servlet.post
+import org.springframework.test.web.servlet.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -165,6 +162,43 @@ internal class AccountControllerTest @Autowired constructor(
                 .andExpect {
                     status { isNotFound() }
                 }
+        }
+    }
+
+    @Nested
+    @DisplayName("DELETE /api/banks/{accountId}")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class DeleteExistingAccount {
+
+        @Test
+        fun `should delete the account with the given account id`() {
+            // given
+            val accountId = 11
+
+            // when
+            mockMvc.delete("$baseUrl/$accountId")
+                .andDo { print() }
+                .andExpect {
+                    status { isNoContent() }
+                }
+
+            // then
+            mockMvc.get("$baseUrl/$accountId")
+                .andExpect { status { isNotFound() } }
+        }
+
+        @Test
+        fun `should return NOT FOUND if no account given account id exists`() {
+            // given
+            val accountId = 100
+
+            // when
+            mockMvc.delete("$baseUrl/$accountId")
+                .andDo { print() }
+                .andExpect { status { isNotFound() } }
+
+            // then
+
         }
     }
 }

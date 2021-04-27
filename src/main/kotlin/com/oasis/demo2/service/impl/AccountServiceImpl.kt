@@ -46,4 +46,12 @@ class AccountServiceImpl(
             throw NoSuchElementException("没有id为: ${account.accountId} 的用户")
         }
     }
+
+    override fun deleteAccount(accountId: Int) {
+        val recordCount = accountMapper.deleteById(accountId)
+
+        if (recordCount == 0) {
+            throw NoSuchElementException("没有id为: $accountId 的用户")
+        }
+    }
 }

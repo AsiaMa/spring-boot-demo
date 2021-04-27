@@ -39,4 +39,8 @@ class AccountController(private val accountService: IAccountService) {
 
     @PatchMapping
     fun updateAccount(@RequestBody account: AccountEntity): AccountEntity = accountService.updateAccount(account)
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteAccount(@PathVariable("id") accountId: Int): Unit = accountService.deleteAccount(accountId)
 }
