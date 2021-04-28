@@ -2,6 +2,7 @@ package com.oasis.demo2.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.oasis.demo2.domain.entity.AccountEntity
+import org.hamcrest.Matchers
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -148,7 +149,7 @@ internal class AccountControllerTest @Autowired constructor(
         }
 
         @Test
-        fun `should return Not Found if not account with given account id exists`() {
+        fun `should return Not Found if no account with given account id exists`() {
             // given
             val invalidAccount = AccountEntity(100, "近段时间", "qwe123")
             // when
@@ -208,12 +209,32 @@ internal class AccountControllerTest @Autowired constructor(
         @Test
         fun `should fun return like account name all accounts `() {
             // given
-            val accountName = 'o'
+            val accountName = "o"
 
             // when
             mockMvc.get("$baseUrl/name/$accountName")
                 .andDo { print() }
-                .andExpect { status { isOk() } }
+                .andExpect {
+                    status { isOk() }
+                    content { contentType(MediaType.APPLICATION_JSON) }
+                }
+            // then
+        }
+
+        @Test
+        fun `should fun return empty list if no account with given account name`() {
+            // given
+            val accountName = "oq"
+
+            // when
+            mockMvc.get("$baseUrl/name/$accountName")
+                .andDo { print() }
+                .andExpect {
+                    status { isOk() }
+                    content { contentType(MediaType.APPLICATION_JSON) }
+                    content { string("[]") }
+                }
+
             // then
 
         }

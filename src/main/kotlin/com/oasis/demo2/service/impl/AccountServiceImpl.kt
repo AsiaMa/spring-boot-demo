@@ -56,6 +56,6 @@ class AccountServiceImpl(
     }
 
     override fun findByName(name: String): Collection<AccountEntity> {
-        return accountMapper.findByName(name) ?: emptyList()
+        return accountMapper.findByName(name)
     }
 }
