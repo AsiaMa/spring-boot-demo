@@ -16,4 +16,24 @@ interface IAccountService : IService<AccountEntity> {
      * 根据用户id查询
      */
     fun findById(accountId: Int): AccountEntity
+
+    /**
+     * 查询所有用户
+     */
+    fun getAccounts(): Collection<AccountEntity>
+
+    /**
+     * 添加新用户
+     */
+    fun addAccount(account: AccountEntity): AccountEntity
+
+    /**
+     * 更新用户
+     */
+    fun updateAccount(account: AccountEntity): AccountEntity
+
+    /**
+     * 删除用户
+     */
+    fun deleteAccount(accountId: Int)
 }

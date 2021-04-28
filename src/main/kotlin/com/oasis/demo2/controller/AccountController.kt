@@ -1,12 +1,11 @@
 package com.oasis.demo2.controller
 
 
+import com.oasis.demo2.domain.entity.AccountEntity
 import com.oasis.demo2.service.IAccountService
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 /**
  * <p>
@@ -17,14 +16,31 @@ import org.springframework.web.bind.annotation.RestController
  * @since 2021-04-27
  */
 @RestController
-@RequestMapping("/account")
-class AccountController {
-    @Autowired
-    lateinit var accountService: IAccountService
+@RequestMapping("/api/accounts")
+class AccountController(private val accountService: IAccountService) {
+
+    @ExceptionHandler(NoSuchElementException::class)
+    fun handleNotFound(e: NoSuchElementException): ResponseEntity<String> =
+        ResponseEntity(e.message, HttpStatus.NOT_FOUND)
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleBadRequest(e: IllegalArgumentException): ResponseEntity<String> =
+        ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
+
+    @GetMapping
+    fun getAccount(): Collection<AccountEntity> = accountService.getAccounts()
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable("id") accountId: Int){
-        val account = accountService.findById(accountId)
-        println(account)
-    }
+    fun findById(@PathVariable("id") accountId: Int) = accountService.findById(accountId)
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addAccount(@RequestBody account: AccountEntity): AccountEntity = accountService.addAccount(account)
+
+    @PatchMapping
+    fun updateAccount(@RequestBody account: AccountEntity): AccountEntity = accountService.updateAccount(account)
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteAccount(@PathVariable("id") accountId: Int): Unit = accountService.deleteAccount(accountId)
 }
