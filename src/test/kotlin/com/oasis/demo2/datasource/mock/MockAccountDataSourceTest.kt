@@ -26,7 +26,7 @@ internal class MockAccountDataSourceTest {
         // when
         val accounts = mockAccountDataSource.retrieveAccounts()
         // then
-        assertThat(accounts).allMatch { it.accountName.isNotBlank() }
+        assertThat(accounts).allMatch { it.accountName!!.isNotBlank() }
         assertThat(accounts).anyMatch { it.accountId != 2 }
         assertThat(accounts).allMatch { it.accountId != 0 }
     }

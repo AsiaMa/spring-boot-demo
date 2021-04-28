@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.annotation.TableName
  * @since 2021-04-27
  */
 @TableName(value = "account")
-class AccountEntity {
+class AccountEntity(accountId: Int, accountName: String, password: String) {
     /**
      * 主键id
      */
@@ -30,6 +30,11 @@ class AccountEntity {
      */
     var password: String? = null
 
+    init {
+        this.accountId = accountId
+        this.accountName = accountName
+        this.password = password
+    }
 
     override fun toString(): String {
         return "Account{" +
