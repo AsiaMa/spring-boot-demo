@@ -1,6 +1,7 @@
 package com.oasis.demo2.service
 
 import com.baomidou.mybatisplus.extension.service.IService
+import com.oasis.demo2.domain.bo.AccountBO
 import com.oasis.demo2.domain.entity.AccountEntity
 
 /**
@@ -15,7 +16,7 @@ interface IAccountService : IService<AccountEntity> {
     /**
      * 根据用户id查询
      */
-    fun findById(accountId: Int): AccountEntity
+    fun findById(accountId: Int): AccountBO
 
     /**
      * 查询所有用户

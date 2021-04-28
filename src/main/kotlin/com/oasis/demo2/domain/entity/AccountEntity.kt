@@ -13,18 +13,29 @@ import com.baomidou.mybatisplus.annotation.TableName
  * @since 2021-04-27
  */
 @TableName(value = "account")
-data class AccountEntity(
+class AccountEntity {
     /**
      * 主键id
      */
     @TableId(value = "account_id", type = IdType.AUTO)
-    val accountId: Int?,
+    var accountId: Int? = null
+
     /**
      * 用户名
      */
-    val accountName: String,
+    var accountName: String? = null
+
     /**
      * 密码
      */
-    val password: String
-)
+    var password: String? = null
+
+
+    override fun toString(): String {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", accountName=" + accountName +
+                ", password=" + password +
+                "}"
+    }
+}

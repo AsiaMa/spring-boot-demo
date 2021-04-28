@@ -2,7 +2,9 @@ package com.oasis.demo2.controller
 
 
 import com.oasis.demo2.domain.entity.AccountEntity
+import com.oasis.demo2.domain.vo.AccountVO
 import com.oasis.demo2.service.IAccountService
+import org.springframework.beans.BeanUtils
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -31,7 +33,12 @@ class AccountController(private val accountService: IAccountService) {
     fun getAccount(): Collection<AccountEntity> = accountService.getAccounts()
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable("id") accountId: Int) = accountService.findById(accountId)
+    fun findById(@PathVariable("id") accountId: Int): AccountVO {
+        val accountVO = AccountVO()
+        val accountBO = accountService.findById(accountId)
+        BeanUtils.copyProperties(accountBO, accountVO)
+        return accountVO
+    }
 
     @GetMapping("/name/{name}")
     fun findByName(@PathVariable name: String) = accountService.findByName(name)

@@ -3,8 +3,10 @@ package com.oasis.demo2.service.impl
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.oasis.demo2.dao.AccountMapper
 import com.oasis.demo2.datasource.AccountDataSource
+import com.oasis.demo2.domain.bo.AccountBO
 import com.oasis.demo2.domain.entity.AccountEntity
 import com.oasis.demo2.service.IAccountService
+import org.springframework.beans.BeanUtils
 import org.springframework.stereotype.Service
 
 /**
@@ -22,8 +24,11 @@ class AccountServiceImpl(
 ) : ServiceImpl<AccountMapper, AccountEntity>(),
     IAccountService {
 
-    override fun findById(accountId: Int): AccountEntity {
-        return accountMapper.selectById(accountId) ?: throw NoSuchElementException("没有id为: $accountId 的用户")
+    override fun findById(accountId: Int): AccountBO {
+        val accountBO = AccountBO()
+        val account = accountMapper.selectById(accountId) ?: throw NoSuchElementException("没有id为: $accountId 的用户")
+        BeanUtils.copyProperties(account, accountBO)
+        return accountBO
     }
 
     override fun getAccounts(): Collection<AccountEntity> = dataSource.retrieveAccounts()
