@@ -9,13 +9,5 @@ class AccountVO {
     /**
      * 用户名
      */
-    var accountName: String? = null
-
-
-    override fun toString(): String {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", accountName=" + accountName +
-                "}"
-    }
+    lateinit var accountName: String
 }

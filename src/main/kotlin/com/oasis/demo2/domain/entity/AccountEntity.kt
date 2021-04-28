@@ -23,24 +23,16 @@ class AccountEntity() {
     /**
      * 用户名
      */
-    var accountName: String? = null
+    lateinit var accountName: String
 
     /**
      * 密码
      */
-    var password: String? = null
+    lateinit var password: String
 
     constructor(accountId: Int, accountName: String, password: String) : this() {
         this.accountId = accountId
         this.accountName = accountName
         this.password = password
-    }
-
-    override fun toString(): String {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", accountName=" + accountName +
-                ", password=" + password +
-                "}"
     }
 }
