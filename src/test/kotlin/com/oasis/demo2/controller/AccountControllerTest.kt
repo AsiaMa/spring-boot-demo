@@ -26,7 +26,7 @@ internal class AccountControllerTest @Autowired constructor(
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     inner class GetAccounts {
         @Test
-        fun `should return all banks`() {
+        fun `should return all accounts`() {
             // when/then
             mockMvc.get(baseUrl)
                 .andDo { print() }
@@ -40,11 +40,11 @@ internal class AccountControllerTest @Autowired constructor(
     }
 
     @Nested
-    @DisplayName("GEt /api/accounts/{accountId}")
+    @DisplayName("GET /api/accounts/{accountId}")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     inner class GetAccount {
         @Test
-        fun `should return one bank with the given account id`() {
+        fun `should return one account with the given account id`() {
             val accountId = 1
 
             mockMvc.get("$baseUrl/$accountId")
@@ -166,7 +166,7 @@ internal class AccountControllerTest @Autowired constructor(
     }
 
     @Nested
-    @DisplayName("DELETE /api/banks/{accountId}")
+    @DisplayName("DELETE /api/accounts/{accountId}")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     inner class DeleteExistingAccount {
 
@@ -197,6 +197,23 @@ internal class AccountControllerTest @Autowired constructor(
                 .andDo { print() }
                 .andExpect { status { isNotFound() } }
 
+            // then
+        }
+    }
+
+    @Nested
+    @DisplayName("GET /api/accounts/name/{accountName}")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class GetAccountByName {
+        @Test
+        fun `should fun return like account name all accounts `() {
+            // given
+            val accountName = 'o'
+
+            // when
+            mockMvc.get("$baseUrl/name/$accountName")
+                .andDo { print() }
+                .andExpect { status { isOk() } }
             // then
 
         }

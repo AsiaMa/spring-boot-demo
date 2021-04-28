@@ -33,6 +33,9 @@ class AccountController(private val accountService: IAccountService) {
     @GetMapping("/{id}")
     fun findById(@PathVariable("id") accountId: Int) = accountService.findById(accountId)
 
+    @GetMapping("/name/{name}")
+    fun findByName(@PathVariable name: String) = accountService.findByName(name)
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun addAccount(@RequestBody account: AccountEntity): AccountEntity = accountService.addAccount(account)

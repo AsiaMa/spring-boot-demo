@@ -13,4 +13,7 @@ import org.apache.ibatis.annotations.Mapper
  * @since 2021-04-27
  */
 @Mapper
-interface AccountMapper : BaseMapper<AccountEntity>
+interface AccountMapper : BaseMapper<AccountEntity> {
+
+    fun findByName(name: String): Collection<AccountEntity>?
+}

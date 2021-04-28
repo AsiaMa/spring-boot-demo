@@ -36,4 +36,9 @@ interface IAccountService : IService<AccountEntity> {
      * 删除用户
      */
     fun deleteAccount(accountId: Int)
+
+    /**
+     * 根据名字查询符合条件的用户（模糊查询）
+     */
+    fun findByName(name: String): Collection<AccountEntity>
 }

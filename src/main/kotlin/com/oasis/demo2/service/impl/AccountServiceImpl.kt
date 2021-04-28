@@ -54,4 +54,8 @@ class AccountServiceImpl(
             throw NoSuchElementException("没有id为: $accountId 的用户")
         }
     }
+
+    override fun findByName(name: String): Collection<AccountEntity> {
+        return accountMapper.findByName(name) ?: emptyList()
+    }
 }
