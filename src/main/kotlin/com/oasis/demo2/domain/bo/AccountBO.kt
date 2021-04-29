@@ -13,19 +13,10 @@ class AccountBO {
     /**
      * 用户名
      */
-    var accountName: String? = null
+    lateinit var accountName: String
 
     /**
      * 密码
      */
-    var password: String? = null
-
-
-    override fun toString(): String {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", accountName=" + accountName +
-                ", password=" + password +
-                "}"
-    }
+    lateinit var password: String
 }

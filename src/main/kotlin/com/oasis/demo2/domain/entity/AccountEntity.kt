@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.annotation.TableName
  * @since 2021-04-27
  */
 @TableName(value = "account")
-class AccountEntity(accountId: Int, accountName: String, password: String) {
+class AccountEntity() {
     /**
      * 主键id
      */
@@ -23,24 +23,16 @@ class AccountEntity(accountId: Int, accountName: String, password: String) {
     /**
      * 用户名
      */
-    var accountName: String? = null
+    lateinit var accountName: String
 
     /**
      * 密码
      */
-    var password: String? = null
+    lateinit var password: String
 
-    init {
+    constructor(accountId: Int, accountName: String, password: String) : this() {
         this.accountId = accountId
         this.accountName = accountName
         this.password = password
-    }
-
-    override fun toString(): String {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", accountName=" + accountName +
-                ", password=" + password +
-                "}"
     }
 }
