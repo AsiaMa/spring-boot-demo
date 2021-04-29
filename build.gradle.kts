@@ -16,14 +16,20 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    // test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // spring web
+    implementation("org.springframework.boot:spring-boot-starter-web")
     // mybatis-plus
     implementation("com.baomidou:mybatis-plus-boot-starter:3.4.2")
+    // mysql driver
     runtimeOnly("mysql:mysql-connector-java")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // print sql log
+    implementation("p6spy:p6spy:3.9.1")
     // mock
     testImplementation("io.mockk:mockk:1.10.4")
 }
