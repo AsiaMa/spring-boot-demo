@@ -1,6 +1,7 @@
 package com.oasis.demo2.controller
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.oasis.demo2.domain.entity.AccountEntity
 import com.oasis.demo2.domain.vo.AccountVO
 import com.oasis.demo2.service.IAccountService
@@ -31,6 +32,13 @@ class AccountController(private val accountService: IAccountService) {
 
     @GetMapping
     fun getAccount(): Collection<AccountEntity> = accountService.getAccounts()
+
+    @GetMapping("/pagination")
+    fun getAccountsByPage(
+        @RequestParam(defaultValue = "1") current: Long,
+        @RequestParam(defaultValue = "2") pageSize: Long
+    ): Page<AccountEntity> =
+        accountService.getAccountsByPage(current, pageSize)
 
     @GetMapping("/{id}")
     fun findById(@PathVariable("id") accountId: Int): AccountVO {

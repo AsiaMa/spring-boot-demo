@@ -55,8 +55,8 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
             val account = accountMapper.selectLinkById(accountId)
 
             // then
-            assertThat(account.accountId).isEqualTo(1)
-            assertThat(account.address?.addressName).isEqualTo("BeiJing")
+            assertThat(account?.accountId).isEqualTo(1)
+            assertThat(account?.address?.addressName).isEqualTo("BeiJing")
         }
 
         @Test
@@ -80,7 +80,7 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
             val address = accountMapper.selectLinkById2(addressId)
 
             // then
-            assertThat(address.addressName).isEqualTo("BeiJing")
+            assertThat(address?.addressName).isEqualTo("BeiJing")
         }
     }
 }

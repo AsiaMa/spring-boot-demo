@@ -1,6 +1,7 @@
 package com.oasis.demo2.service.impl
 
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.oasis.demo2.dao.AccountMapper
 import com.oasis.demo2.datasource.AccountDataSource
@@ -69,5 +70,10 @@ class AccountServiceImpl(
         val queryWrapper = KtQueryWrapper(AccountEntity::class.java)
         queryWrapper.like(AccountEntity::accountName, name)
         return accountMapper.selectList(queryWrapper)
+    }
+
+    override fun getAccountsByPage(current: Long, pageSize: Long): Page<AccountEntity> {
+        val page = Page<AccountEntity>(current, pageSize)
+        return accountMapper.selectPage(page, null)
     }
 }

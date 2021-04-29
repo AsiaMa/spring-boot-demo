@@ -21,7 +21,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(module = "junit")
+        exclude(module = "mockito-core")
+    }
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    // mock
+    testImplementation("io.mockk:mockk:1.10.4")
     // spring web
     implementation("org.springframework.boot:spring-boot-starter-web")
     // mybatis-plus
@@ -30,8 +37,6 @@ dependencies {
     runtimeOnly("mysql:mysql-connector-java")
     // print sql log
     implementation("p6spy:p6spy:3.9.1")
-    // mock
-    testImplementation("io.mockk:mockk:1.10.4")
 }
 
 tasks.withType<KotlinCompile> {

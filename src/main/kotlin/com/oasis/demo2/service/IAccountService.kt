@@ -1,5 +1,6 @@
 package com.oasis.demo2.service
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.IService
 import com.oasis.demo2.domain.bo.AccountBO
 import com.oasis.demo2.domain.entity.AccountEntity
@@ -47,4 +48,9 @@ interface IAccountService : IService<AccountEntity> {
      * 根据名字查询符合条件的用户（模糊查询）使用KtQueryWrapper
      */
     fun findByName2(name: String): Collection<AccountEntity>
+
+    /**
+     * 查询所有用户（分页）
+     */
+    fun getAccountsByPage(current: Long, pageSize: Long): Page<AccountEntity>
 }

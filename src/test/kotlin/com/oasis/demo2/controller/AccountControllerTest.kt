@@ -40,6 +40,29 @@ internal class AccountControllerTest @Autowired constructor(
     }
 
     @Nested
+    @DisplayName("GET /api/accounts/pagination")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class GetAccountByPage {
+
+        @Test
+        fun `should return current page info`() {
+            // given
+            val current = 2
+            val pageSize = 3
+            // when/then
+            mockMvc.get("$baseUrl/pagination?current=$current&pageSize=$pageSize")
+                .andDo { print() }
+                .andExpect {
+                    status { isOk() }
+                }.andExpect {
+                    jsonPath("$.current") { value(current) }
+                }.andExpect {
+                    jsonPath("$.size") { value(pageSize) }
+                }
+        }
+    }
+
+    @Nested
     @DisplayName("GET /api/accounts/{accountId}")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     inner class GetAccount {
