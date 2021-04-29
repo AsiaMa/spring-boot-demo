@@ -34,7 +34,7 @@ class AccountEntity() {
     var addressId: Int? = null
 
     @TableField(exist = false)
-    lateinit var address: AddressEntity
+    var address: AddressEntity? = null
 
     constructor(accountId: Int, accountName: String, password: String, addressId: Int) : this() {
         this.accountId = accountId
