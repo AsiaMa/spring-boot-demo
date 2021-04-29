@@ -1,5 +1,6 @@
 package com.oasis.demo2.service.impl
 
+import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.oasis.demo2.dao.AccountMapper
 import com.oasis.demo2.datasource.AccountDataSource
@@ -62,5 +63,11 @@ class AccountServiceImpl(
 
     override fun findByName(name: String): Collection<AccountEntity> {
         return accountMapper.findByName(name)
+    }
+
+    override fun findByName2(name: String): Collection<AccountEntity> {
+        val queryWrapper = KtQueryWrapper(AccountEntity::class.java)
+        queryWrapper.like(AccountEntity::accountName, name)
+        return accountMapper.selectList(queryWrapper)
     }
 }

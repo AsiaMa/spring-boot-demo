@@ -42,4 +42,9 @@ interface IAccountService : IService<AccountEntity> {
      * 根据名字查询符合条件的用户（模糊查询）
      */
     fun findByName(name: String): Collection<AccountEntity>
+
+    /**
+     * 根据名字查询符合条件的用户（模糊查询）使用KtQueryWrapper
+     */
+    fun findByName2(name: String): Collection<AccountEntity>
 }

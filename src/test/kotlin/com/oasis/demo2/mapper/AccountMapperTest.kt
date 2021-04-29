@@ -15,7 +15,7 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
     @Nested
     @DisplayName("get accounts")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    inner class GetAccounts {
+    inner class GetAccountsByName {
 
         @Test
         fun `should provide a collection of accounts with given account name`() {
@@ -26,6 +26,18 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
             val accounts = accountMapper.findByName(accountName)
             // then
             assertThat(accounts).isNotEmpty
+        }
+
+        @Test
+        fun `should return empty list with the given account name`() {
+            // given
+            val accountName = "oop"
+
+            // when
+            val accounts = accountMapper.findByName(accountName)
+
+            // then
+            assertThat(accounts.size).isEqualTo(0)
         }
     }
 }
