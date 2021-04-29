@@ -56,7 +56,7 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
 
             // then
             assertThat(account.accountId).isEqualTo(1)
-            assertThat(account.address.addressName).isEqualTo("BeiJing")
+            assertThat(account.address?.addressName).isEqualTo("BeiJing")
         }
 
         @Test
