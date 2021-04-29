@@ -6,6 +6,12 @@ spring:
     url: jdbc:p6spy:mysql://localhost:3306/spring_demo?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: root
     password: 123456
+
 logging:
   level:
     com.oasis.demo2: debug
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:/mapper/*Mapper.xml
