@@ -10,4 +10,6 @@ class AccountVO {
      * 用户名
      */
     lateinit var accountName: String
+
+    var addressName: String? = null
 }

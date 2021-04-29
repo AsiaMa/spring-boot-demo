@@ -18,7 +18,7 @@ interface AccountMapper : BaseMapper<AccountEntity> {
 
     fun findByName(name: String): Collection<AccountEntity>
 
-    fun selectLinkById(id: Int): AccountEntity
+    fun selectLinkById(id: Int): AccountEntity?
 
-    fun selectLinkById2(id: Int): AccountBO
+    fun selectLinkById2(id: Int): AccountBO?
 }

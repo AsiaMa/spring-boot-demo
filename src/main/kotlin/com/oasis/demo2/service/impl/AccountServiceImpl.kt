@@ -27,12 +27,12 @@ class AccountServiceImpl(
 
     override fun findById(accountId: Int): AccountBO {
         val accountBO = AccountBO()
-        val account = accountMapper.selectById(accountId) ?: throw NoSuchElementException("没有id为: $accountId 的用户")
+        val account = accountMapper.selectLinkById2(accountId) ?: throw NoSuchElementException("没有id为: $accountId 的用户")
         BeanUtils.copyProperties(account, accountBO)
         return accountBO
     }
 
-    override fun getAccounts(): Collection<AccountEntity> = dataSource.retrieveAccounts()
+    override fun getAccounts(): Collection<AccountEntity> = accountMapper.selectList(null)
 
     override fun addAccount(account: AccountEntity): AccountEntity {
         val existsAccount = accountMapper.selectById(account.accountId)
