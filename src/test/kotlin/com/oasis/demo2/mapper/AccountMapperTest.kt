@@ -18,7 +18,7 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
     inner class GetAccountsByName {
 
         @Test
-        fun `should provide a collection of accounts with given account name`() {
+        fun `should return all match accounts with  the given account name`() {
             // given
             val accountName = "o"
 
@@ -29,12 +29,12 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
         }
 
         @Test
-        fun `should return empty list with the given account name`() {
+        fun `should return empty list if the account name does not exists`() {
             // given
-            val accountName = "oop"
+            val invalidAccountName = "oop"
 
             // when
-            val accounts = accountMapper.findByName(accountName)
+            val accounts = accountMapper.findByName(invalidAccountName)
 
             // then
             assertThat(accounts.size).isEqualTo(0)
@@ -47,7 +47,7 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
     inner class GetAccountById {
 
         @Test
-        fun `should provide an account with given account id`() {
+        fun `should return an account with the given account id`() {
             // given
             val accountId = 1
 
@@ -57,6 +57,18 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
             // then
             assertThat(account.accountId).isEqualTo(1)
             assertThat(account.address.addressName).isEqualTo("BeiJing")
+        }
+
+        @Test
+        fun `should return null if the account id does not exists`() {
+            // given
+            val invalidAccountId = -1
+
+            // when
+            val account = accountMapper.selectLinkById(invalidAccountId)
+
+            // then
+            assertThat(account).isNull()
         }
     }
 }

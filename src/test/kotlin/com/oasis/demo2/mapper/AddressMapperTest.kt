@@ -18,7 +18,7 @@ internal class AddressMapperTest @Autowired constructor(private val addressMappe
     inner class GetAddressById {
 
         @Test
-        fun `should get address with given address id`() {
+        fun `should return an address with the given address id`() {
             // given
             val addressId = 1
 
@@ -27,6 +27,18 @@ internal class AddressMapperTest @Autowired constructor(private val addressMappe
 
             // then
             assertThat(address.id).isEqualTo(1)
+        }
+
+        @Test
+        fun `should return no address if the given address id does not exists`() {
+            // given
+            val invalidAddressId = -1
+
+            // when
+            val address = addressMapper.selectLinkById(invalidAddressId)
+
+            // then
+            assertThat(address).isNull()
         }
     }
 }
