@@ -1,6 +1,7 @@
 package com.oasis.demo2.domain.entity
 
 import com.baomidou.mybatisplus.annotation.IdType
+import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
@@ -23,4 +24,10 @@ class AddressEntity : Serializable {
      * 地址名
      */
     lateinit var addressName: String
+
+    /**
+     * 一个地址下的所有用户
+     */
+    @TableField(exist = false)
+    var addressList: Collection<AccountEntity>? = null
 }

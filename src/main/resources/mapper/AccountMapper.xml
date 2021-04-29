@@ -16,6 +16,13 @@
         account_id, account_name, password, address_id
     </sql>
 
+    <select id="selectLinkById" parameterType="int" resultMap="MultiResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        where account_id = #{id}
+    </select>
+
     <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -23,10 +30,10 @@
         where account_name like CONCAT('%', #{name}, '%')
     </select>
 
-    <select id="selectLinkById" resultMap="MultiResultMap">
+    <select id="selectByAddressId" parameterType="int" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from account
-        where account_id = #{id}
+        where address_id = #{id}
     </select>
 </mapper>

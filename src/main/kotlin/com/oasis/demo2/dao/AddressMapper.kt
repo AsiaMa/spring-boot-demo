@@ -2,6 +2,7 @@ package com.oasis.demo2.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
 import com.oasis.demo2.domain.entity.AddressEntity
+import org.apache.ibatis.annotations.Mapper
 
 /**
  * <p>
@@ -11,4 +12,7 @@ import com.oasis.demo2.domain.entity.AddressEntity
  * @author AsiaMa
  * @since 2021-04-29
  */
-interface AddressMapper : BaseMapper<AddressEntity>
+@Mapper
+interface AddressMapper : BaseMapper<AddressEntity> {
+    fun selectLinkById(id: Int): AddressEntity
+}

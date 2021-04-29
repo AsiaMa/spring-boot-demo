@@ -6,11 +6,22 @@
         <result column="address_name" jdbcType="VARCHAR" property="addressName"/>
     </resultMap>
 
+    <resultMap id="MultiResultMap" type="com.oasis.demo2.domain.entity.AddressEntity" extends="BaseResultMap">
+        <collection property="addressList" column="id" select="com.oasis.demo2.dao.AccountMapper.selectByAddressId"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id, address_name
     </sql>
 
-    <select id="selectById" resultMap="BaseResultMap">
+    <select id="selectById" parameterType="int" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from address
+        where id = #{addressId}
+    </select>
+
+    <select id="selectLinkById" parameterType="int" resultMap="MultiResultMap">
         select
         <include refid="Base_Column_List"/>
         from address

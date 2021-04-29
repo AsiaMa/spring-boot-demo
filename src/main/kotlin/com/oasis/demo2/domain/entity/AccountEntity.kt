@@ -1,6 +1,7 @@
 package com.oasis.demo2.domain.entity
 
 import com.baomidou.mybatisplus.annotation.IdType
+import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 
@@ -32,6 +33,7 @@ class AccountEntity() {
 
     var addressId: Int? = null
 
+    @TableField(exist = false)
     lateinit var address: AddressEntity
 
     constructor(accountId: Int, accountName: String, password: String, addressId: Int) : this() {
