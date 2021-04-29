@@ -19,4 +19,8 @@ class AccountBO {
      * 密码
      */
     lateinit var password: String
+
+    var addressId: Int? = null
+
+    var addressName: String? = null
 }

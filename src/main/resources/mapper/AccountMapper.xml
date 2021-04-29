@@ -23,6 +23,13 @@
         where account_id = #{id}
     </select>
 
+    <select id="selectLinkById2" parameterType="int" resultType="com.oasis.demo2.domain.bo.AccountBO">
+        select a.account_id, a.account_name, a.password, a.address_id, b.address_name
+        from account a
+                 left join address b on a.account_id = b.id
+        where a.account_id = #{id}
+    </select>
+
     <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

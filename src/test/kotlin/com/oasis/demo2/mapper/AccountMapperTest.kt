@@ -70,5 +70,17 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
             // then
             assertThat(account).isNull()
         }
+
+        @Test
+        fun `method2 should return an address with the given address id`() {
+            // given
+            val addressId = 1
+
+            // when
+            val address = accountMapper.selectLinkById2(addressId)
+
+            // then
+            assertThat(address.addressName).isEqualTo("BeiJing")
+        }
     }
 }
