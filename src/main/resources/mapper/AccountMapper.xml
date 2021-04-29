@@ -5,10 +5,15 @@
         <id column="account_id" jdbcType="INTEGER" property="accountId"/>
         <result column="account_name" jdbcType="VARCHAR" property="accountName"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="address_id" jdbcType="INTEGER" property="addressId"/>
+    </resultMap>
+
+    <resultMap id="MultiResultMap" type="com.oasis.demo2.domain.entity.AccountEntity" extends="BaseResultMap">
+        <association property="address" column="address_id" select="com.oasis.demo2.dao.AddressMapper.selectById"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        account_id, account_name, password
+        account_id, account_name, password, address_id
     </sql>
 
     <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -16,5 +21,12 @@
         <include refid="Base_Column_List"/>
         from account
         where account_name like CONCAT('%', #{name}, '%')
+    </select>
+
+    <select id="selectLinkById" resultMap="MultiResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        where account_id = #{id}
     </select>
 </mapper>

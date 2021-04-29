@@ -2,7 +2,6 @@ package com.oasis.demo2.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.oasis.demo2.domain.entity.AccountEntity
-import org.hamcrest.Matchers
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -76,7 +75,7 @@ internal class AccountControllerTest @Autowired constructor(
         @Test
         fun `should add the new account`() {
             // given
-            val newAccount = AccountEntity(10, "bootstrap", "222")
+            val newAccount = AccountEntity(10, "bootstrap", "222", 1)
 
             // when
             val preformPost = mockMvc.post(baseUrl) {
@@ -102,7 +101,7 @@ internal class AccountControllerTest @Autowired constructor(
 
         @Test
         fun `should return BAD REQUEST if account with given account id already exists`() {
-            val invalidAccount = AccountEntity(10, "bootstrap", "222")
+            val invalidAccount = AccountEntity(10, "bootstrap", "222", 1)
 
             // when
             val preformPost = mockMvc.post(baseUrl) {
@@ -125,7 +124,7 @@ internal class AccountControllerTest @Autowired constructor(
         @Test
         fun `should update an existing account`() {
             // given
-            val updatedAccount = AccountEntity(11, "book", "abc123")
+            val updatedAccount = AccountEntity(11, "book", "abc123", 1)
 
             // when
             val performPatchRequest = mockMvc.patch(baseUrl) {
@@ -151,7 +150,7 @@ internal class AccountControllerTest @Autowired constructor(
         @Test
         fun `should return Not Found if no account with given account id exists`() {
             // given
-            val invalidAccount = AccountEntity(100, "近段时间", "qwe123")
+            val invalidAccount = AccountEntity(100, "近段时间", "qwe123", 1)
             // when
             val performPatchRequest = mockMvc.patch(baseUrl) {
                 contentType = MediaType.APPLICATION_JSON

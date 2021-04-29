@@ -40,4 +40,23 @@ internal class AccountMapperTest @Autowired constructor(@Autowired val accountMa
             assertThat(accounts.size).isEqualTo(0)
         }
     }
+
+    @Nested
+    @DisplayName("get account")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class GetAccountById {
+
+        @Test
+        fun `should provide an account with given account id`() {
+            // given
+            val accountId = 1
+
+            // when
+            val account = accountMapper.selectLinkById(accountId)
+
+            // then
+            assertThat(account.accountId).isEqualTo(1)
+            assertThat(account.address.addressName).isEqualTo("BeiJing")
+        }
+    }
 }

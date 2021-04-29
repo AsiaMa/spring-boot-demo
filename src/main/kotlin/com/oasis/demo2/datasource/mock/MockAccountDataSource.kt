@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository
 class MockAccountDataSource : AccountDataSource {
 
     val accounts = listOf(
-        AccountEntity(1, "Alice", "112233"),
-        AccountEntity(2, "Jack", "123"),
-        AccountEntity(3, "Pony", "666")
+        AccountEntity(1, "Alice", "112233", 1),
+        AccountEntity(2, "Jack", "123", 1),
+        AccountEntity(3, "Pony", "666", 2)
     )
 
 

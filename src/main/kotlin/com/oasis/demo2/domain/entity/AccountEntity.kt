@@ -30,9 +30,14 @@ class AccountEntity() {
      */
     lateinit var password: String
 
-    constructor(accountId: Int, accountName: String, password: String) : this() {
+    var addressId: Int? = null
+
+    lateinit var address: AddressEntity
+
+    constructor(accountId: Int, accountName: String, password: String, addressId: Int) : this() {
         this.accountId = accountId
         this.accountName = accountName
         this.password = password
+        this.addressId = addressId
     }
 }

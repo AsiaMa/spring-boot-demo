@@ -16,4 +16,6 @@ import org.apache.ibatis.annotations.Mapper
 interface AccountMapper : BaseMapper<AccountEntity> {
 
     fun findByName(name: String): Collection<AccountEntity>
+
+    fun selectLinkById(id: Int): AccountEntity
 }
