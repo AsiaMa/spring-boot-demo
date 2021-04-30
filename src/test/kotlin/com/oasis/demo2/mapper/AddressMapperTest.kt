@@ -1,6 +1,8 @@
 package com.oasis.demo2.mapper
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.oasis.demo2.dao.AddressMapper
+import com.oasis.demo2.domain.entity.AddressEntity
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -39,6 +41,24 @@ internal class AddressMapperTest @Autowired constructor(private val addressMappe
 
             // then
             assertThat(address).isNull()
+        }
+    }
+
+    @Nested
+    @DisplayName("get page address")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class GetPageAddress {
+
+        @Test
+        fun `should return page info for address`() {
+            val page = Page<AddressEntity>(1, 2)
+            // when
+            val pageInfo = addressMapper.selectPageInfo(page)
+
+            // then
+            assertThat(pageInfo.size).isEqualTo(2)
+            assertThat(pageInfo.current).isEqualTo(1)
+            assertThat(pageInfo.records.size).isEqualTo(2)
         }
     }
 }

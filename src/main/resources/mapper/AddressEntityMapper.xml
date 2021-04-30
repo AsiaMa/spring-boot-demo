@@ -27,4 +27,10 @@
         from address
         where id = #{addressId}
     </select>
+
+    <select id="selectPageInfo" resultMap="MultiResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from address
+    </select>
 </mapper>
