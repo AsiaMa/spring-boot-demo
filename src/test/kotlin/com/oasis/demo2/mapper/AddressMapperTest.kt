@@ -50,7 +50,7 @@ internal class AddressMapperTest @Autowired constructor(private val addressMappe
     inner class GetPageAddress {
 
         @Test
-        fun `should return page info for address`() {
+        fun `should return address info of the current page`() {
             val page = Page<AddressEntity>(1, 2)
             // when
             val pageInfo = addressMapper.selectPageInfo(page)

@@ -1,5 +1,6 @@
 package com.oasis.demo2.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.IService
 import com.oasis.demo2.domain.entity.AddressEntity
 
@@ -11,4 +12,6 @@ import com.oasis.demo2.domain.entity.AddressEntity
  * @author AsiaMa
  * @since 2021-04-29
  */
-interface IAddressService : IService<AddressEntity>
+interface IAddressService : IService<AddressEntity> {
+    fun selectPageInfo(current: Long, pageSize: Long): Page<AddressEntity>
+}
